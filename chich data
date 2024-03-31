@@ -1,0 +1,12 @@
+# Assuming you have a dataset named 'chicken_data' with columns 'Weight', 'Time', and 'Diet'
+model <- lm(Weight ~ Time + Diet, data = chicken_data)
+summary(model)
+
+# Predict weight for Time=10 and Diet=1:
+new_data <- data.frame(Time = 10, Diet = 1)
+predicted_weight <- predict(model, newdata = new_data)
+print(predicted_weight)
+
+# Find the error in model:
+error <- summary(model)$sigma
+print(error)
