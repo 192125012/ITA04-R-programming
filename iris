@@ -1,0 +1,18 @@
+# Assuming 'iris' dataset is available in R
+
+# Randomly sample the iris dataset
+set.seed(123)
+train_index <- sample(1:nrow(iris), 0.8 * nrow(iris))
+train_data <- iris[train_index, ]
+test_data <- iris[-train_index, ]
+
+# Create logistics regression model
+model <- glm(Species ~ Petal.Width + Petal.Length, data = train_data, family = "binomial")
+
+# Predict probabilities
+probabilities <- predict(model, newdata = test_data, type = "response")
+
+# Create confusion matrix
+predicted_classes <- ifelse(probabilities > 0.5, "versicolor", "not versicolor")
+confusion_matrix <- table(predicted_classes, test_data$Species)
+print(confusion_matrix)
